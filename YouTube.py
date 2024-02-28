@@ -6,9 +6,6 @@ import pandas as pd
 import streamlit as st
 
 
-
-
-
 def authentication():
     api_key='AIzaSyCgZp7Z5Wnwz7xcKTEplCU0IAYYJhA4yqY'
     youtube = build('youtube', 'v3',developerKey=api_key)
@@ -483,10 +480,9 @@ elif questions == '9. What is the average duration of all videos in each channel
     df = pd.DataFrame(mycursor.fetchall(), columns=mycursor.column_names)
     st.write("### :green[Average video duration for each channel :]",df)
 
-elif questions == '10. Which videos have the highest number of comments, and what are their corresponding video names?':
+elif questions == '10. Which videos have the highest number of comments, and what are their corresponding channel names?':
     mycursor.execute("""select title as VideoTitle, channel_Name as ChannelName, comments as Comments from videos 
                        where Comments is not null order by Comments DESC
                         LIMIT 10""")
     df = pd.DataFrame(mycursor.fetchall(), columns=mycursor.column_names)
-    st.write(df)
-    st.write("### :green[Top 10 videos with the most comments :]")
+    st.write("### :green[Top 10 videos with the most comments :]",df)
